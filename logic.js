@@ -7,10 +7,18 @@ const books = [
 
 const bookList = document.getElementById('bookList');
 const loader = document.getElementById('loader');
+const titleFilter = document.getElementById('titleFilter');
+const authorFilter = document.getElementById('authorFilter');
+const subjectFilter = document.getElementById('subjectFilter');
+const publishdateFilter = document.getElementById('publishdateFilter');
+const bookCount = document.getElementById('bookCount');
 let visibleBooks = 5;
 let loadedBooks = 0;
 
 function displayBooks() {
+	bookList.innerHTML = '';
+	let filteredBooks = filterBooks();
+	
 	for (let i = loadedBooks; i < loadedBooks + visibleBooks && i < books.length; i++) {
 		const book = books[i];
 		const listItem = document.createElement('li');
@@ -29,6 +37,22 @@ function displayBooks() {
 	} else {
 		loader.style.display = 'block';
 	}
+	updateBookCount(filteredBooks.length);
+}
+
+// Function to filter the books based on the input filters
+function filterBooks() {
+	const title = titleFilter.value.toLowerCase();
+	const author = authorFilter.value.toLowerCase();
+	const subject = subjectFilter.value.toLowerCase();
+	const publishdate = publishdateFilter.value.toLowerCase();
+	
+	return books.filter(book => {
+		return book.title.toLowerCase().includes(title) &&
+			book.author.toLowerCase().includes(author) &&
+			book.subject.toLowerCase().includes(subject) &&
+			book.publishdate.toLowerCase().includes(publishdate);
+	});
 }
 
 // Function to check if scroll reached the bottom
@@ -37,6 +61,11 @@ function isScrollAtBottom() {
 	const windowHeight = window.innerHeight;
 	const documentHeight = document.documentElement.scrollHeight;
 	return scrollTop + windowHeight >= documentHeight;
+}
+
+// Function to update the count of books
+function updateBookCount(count) {
+	bookCount.textContent = `Total Books: ${count}`;
 }
 
 // Event listener for scroll
