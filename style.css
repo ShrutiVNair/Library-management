@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Library Management</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Library Management</h1>
+		<input type="text" id="searchInput" placeholder="Search books...">
+		<div id="filterContainer">
+			<label>Filter by:</label>
+			<select id="filterSelect">
+				<option value="title">Title</option>
+				<option value="author">Author</option>
+				<option value="subject">Subject</option>
+				<option value="publishDate">Publish Date</option>
+			</select>
+			<input type="text" id="filterInput" placeholder="Enter filter value...">
+			<button id="filterButton">Filter</button>
+			<button id="resetButton">Reset</button>
+		</div>
+	</header>
+	<main>
+		<ul id="bookList">
+			<!-- Book items will be added dynamically here -->
+		</ul>
+	</main>
+	<footer>
+		<p id="bookCount"></p>
+	</footer>
+	<script src="script.js"></script>
+</body>
+</html>
